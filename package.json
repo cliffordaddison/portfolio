@@ -1,7 +1,7 @@
 {
   "name": "clifford-portfolio",
-  "homepage": "https://cliffordaddison.github.io/portfolio",
   "version": "1.0.0",
+  "homepage": "https://cliffordaddison.github.io/portfolio",
   "private": true,
   "scripts": {
     "dev": "vite",
