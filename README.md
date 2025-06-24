@@ -9,12 +9,9 @@ This is my personal portfolio website built with **React**, **Tailwind CSS**, an
 - Downloadable resume (via Google Drive direct link)
 - Built using modern frontend stack (React + Tailwind + Vite)
 
-## 📸 Assets
-Put your photo in `public/assets/clifford.jpg`.
-
 ## 🧠 Technologies Used
 - React
 - Tailwind CSS
-- TypeScript (optional)
+- TypeScript
 - Vite
 - Lucide Icons
