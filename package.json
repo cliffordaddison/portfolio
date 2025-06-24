@@ -1,5 +1,6 @@
 {
   "name": "clifford-portfolio",
+  "homepage": "https://cliffordaddison.github.io/portfolio",
   "version": "1.0.0",
   "private": true,
   "scripts": {
