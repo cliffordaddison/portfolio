@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ArrowDownToLine } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
