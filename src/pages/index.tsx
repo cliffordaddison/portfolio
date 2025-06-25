@@ -10,7 +10,6 @@ export default function Home() {
   const aboutRef = useRef(null);
   const experienceRef = useRef(null);
   const projectsRef = useRef(null);
-  const cursorRef = useRef(null);
 
   useEffect(() => {
     setMounted(true);
@@ -27,19 +26,10 @@ export default function Home() {
       }
     };
 
-    const handleMouseMove = (e) => {
-      if (cursorRef.current) {
-        cursorRef.current.style.left = `${e.clientX}px`;
-        cursorRef.current.style.top = `${e.clientY}px`;
-      }
-    };
-
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('mousemove', handleMouseMove);
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
@@ -168,16 +158,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-navy text-slate-300 font-sans">
-      {/* Custom cursor with rings */}
-      <div 
-        ref={cursorRef}
-        className="fixed pointer-events-none z-50 transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
-      >
-        <div className="absolute w-4 h-4 rounded-full bg-white opacity-20 transform -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute w-8 h-8 rounded-full border-2 border-blue-400 opacity-30 animate-ping-slow transform -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute w-12 h-12 rounded-full border-2 border-purple-400 opacity-20 animate-ping-slower transform -translate-x-1/2 -translate-y-1/2"></div>
-      </div>
-
       {/* Navbar */}
       <nav className="fixed w-full bg-navy/90 backdrop-blur-sm z-40 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-8 py-4">
@@ -318,7 +298,7 @@ const Left = ({ name, subtext, jobStatus, jobStatusLink, twitterURL, instaURL, g
 
         <div className="w-48 h-48 rounded-full overflow-hidden mb-8 mx-auto md:mx-0 border-2 border-green/30 relative group">
           <img 
-            src="public/assets/clifford.jpg" 
+            src="./public/assets/clifford.jpg" 
             alt="Clifford Addison" 
             className="w-full h-full object-cover"
           />
