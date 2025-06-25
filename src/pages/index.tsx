@@ -298,10 +298,11 @@ const Left = ({ name, subtext, jobStatus, jobStatusLink, twitterURL, instaURL, g
 
         <div className="w-48 h-48 rounded-full overflow-hidden mb-8 mx-auto md:mx-0 border-2 border-green/30 relative group">
           <img 
-            src="/assets/clifford.jpg"  {/* Changed from "./public/assets/clifford.jpg" */}
-            alt="Clifford Addison"       {/* Always include alt text for accessibility */}
+            src="/assets/clifford.jpg"
+            alt="Clifford Addison"
             className="w-full h-full object-cover"
           />
+        </div>
           {/* Subtle glow effect */}
           <div className="absolute inset-0 rounded-full overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 via-purple-400/10 to-green/10"></div>
