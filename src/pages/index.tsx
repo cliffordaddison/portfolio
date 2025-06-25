@@ -8,14 +8,119 @@ export default function Home() {
   if (!mounted) return null;
 
   const DATA = {
-    name: "Hey, I'm Clifford Addison",
-    subtext: "Artificial Intelligence & Data Engineering | Scalable Pipelines | Predictive Analytics",
+    name: "Clifford Addison",
+    subtext: "Artificial Intelligence & Data Engineering | Scalable Pipelines | Predictive Analytics | Data Infrastructure",
     jobStatus: "AI Student @ Loyalist College",
     twitterURL: 'https://twitter.com/',
     instaURL: 'https://instagram.com/',
     githubURL: 'https://github.com/cliffordaddison',
     linkedinURL: 'https://www.linkedin.com/in/cliffordaddison',
-    resumeURL: 'https://drive.usercontent.google.com/u/0/uc?id=19AKkU14qt_3w5grRQAdEcEvMetZ2KIO7&export=download'
+    resumeURL: 'https://drive.usercontent.google.com/u/0/uc?id=19AKkU14qt_3w5grRQAdEcEvMetZ2KIO7&export=download',
+    about: "I’m a passionate Artificial Intelligence and Data Science graduate student with strong experience in data modeling, ETL pipeline development, and machine learning. I aim to contribute to Hootsuite's data engineering team through technical rigor and collaborative energy.",
+    experience: [
+      {
+        title: "Part-Time Experience in Canada",
+        jobs: [
+          {
+            company: "Food Basics",
+            position: "Cashier",
+            duration: "Aug 2023 – Present",
+            description: [
+              "Provided exceptional customer service, performed price checks, and processed returns."
+            ]
+          }
+        ]
+      },
+      {
+        title: "Professional Experience",
+        jobs: [
+          {
+            company: "Scanport Limited",
+            position: "Operations Manager",
+            duration: "Dec 2023 – Mar 2024",
+            description: [
+              "Oversaw container scanning operations using X-ray technology; ensured compliance with radiation safety standards.",
+              "Collaborated with stakeholders and teams to improve efficiency at the port."
+            ]
+          },
+          {
+            company: "Scanport Limited",
+            position: "Deputy Operations Manager",
+            duration: "Jan 2021 – Dec 2023",
+            description: [
+              "Applied operational strategy to meet safety and efficiency KPIs.",
+              "Delivered staff training in safety, data logging, and regulatory reporting."
+            ]
+          },
+          {
+            company: "Scanport Limited",
+            position: "Senior Shift Supervisor",
+            duration: "Jun 2019 – Dec 2020",
+            description: [
+              "Supervised radiation detection systems and managed teams in controlled zones."
+            ]
+          },
+          {
+            company: "Technical Security & Logistics",
+            position: "General Manager, Transportation",
+            duration: "Nov 2016 – Nov 2017",
+            description: [
+              "Managed international and local fleet logistics and cut costs by 15%."
+            ]
+          },
+          {
+            company: "Appolonia Development Co.",
+            position: "Administrator",
+            duration: "Aug 2015 – Jul 2016",
+            description: [
+              "Streamlined document management and improved client communication."
+            ]
+          }
+        ]
+      }
+    ],
+    projects: [
+      {
+        title: "Scalable Yelp Review Pipeline",
+        link: "https://github.com/cliffordaddison/Scalable-Yelp-Review-Pipeline",
+        description: "Designed an end-to-end machine learning pipeline integrating image metadata and text features from Yelp’s 3.4M+ business reviews using Python and SQL."
+      },
+      {
+        title: "Weather Forecasting Using Machine Learning",
+        link: "https://github.com/cliffordaddison/Weather-Forecasting",
+        description: "Built pipelines for data processing for a Linear Regression model with 85% accuracy on an integrated large weather dataset; BI visualization."
+      },
+      {
+        title: "Bank Churn & Fraud Detection",
+        link: "https://github.com/cliffordaddison/Bank-Churn-Fraud-Detection",
+        description: "Developed classification models (Logistic Regression, XGBoost) to predict churn and detect fraud; applied SHAP for model explainability."
+      },
+      {
+        title: "Loan Eligibility Predictor",
+        link: "https://github.com/cliffordaddison/Loan-Eligibility-Prediction",
+        description: "Logistic Regression vs Random Forest on financial datasets, with a user-friendly Streamlit UI."
+      },
+      {
+        title: "Medical Insurance Cost App",
+        link: "https://github.com/cliffordaddison/Medical-Insurance-Cost-Prediction",
+        description: "Predicts insurance costs from health profiles using regression models and a custom web interface."
+      },
+      {
+        title: "Customer Segmentation with K-Means",
+        link: "https://github.com/cliffordaddison/Customer-Segmentation-with-K-Means-Clustering",
+        description: "Unsupervised clustering to segment customers for targeted marketing strategies."
+      },
+      {
+        title: "2024 US Elections Analysis",
+        link: "https://github.com/cliffordaddison/2024-US-Elections",
+        description: "Data-driven insights and visualizations on the 2024 US elections using open datasets."
+      },
+      {
+        title: "Smart Home Fire Alarm System (IoT)",
+        link: "https://github.com/cliffordaddison/Smart_Home_Fire_Alarm_System",
+        description: "IoT-based system for real-time fire detection and alerts, integrating sensors and cloud notifications."
+      }
+    ]
   };
 
   return (
@@ -29,7 +134,12 @@ export default function Home() {
         githubURL={DATA.githubURL}
         linkedinURL={DATA.linkedinURL}
       />
-      <Right resumeURL={DATA.resumeURL} />
+      <Right 
+        about={DATA.about}
+        experience={DATA.experience}
+        projects={DATA.projects}
+        resumeURL={DATA.resumeURL}
+      />
     </div>
   );
 }
@@ -37,7 +147,7 @@ export default function Home() {
 const Left = ({ name, subtext, jobStatus, twitterURL, instaURL, githubURL, linkedinURL }) => {
   return (
     <div className="left">
-      <div className="bg-img"></div>
+      <div className="bg-img" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/assets/clifford.jpg)` }}></div>
       <div className="left-inner">
         <div className="info">
           <h2 className="name">{name}</h2>
@@ -49,82 +159,60 @@ const Left = ({ name, subtext, jobStatus, twitterURL, instaURL, githubURL, linke
             <a href={githubURL} target="_blank"><i className="fa fa-github"></i></a>
             <a href={linkedinURL} target="_blank"><i className="fa fa-linkedin"></i></a>
           </div>
+          <div className="nav-links">
+            <a href="#about" className="nav-item">About</a>
+            <a href="#experience" className="nav-item">Experience</a>
+            <a href="#projects" className="nav-item">Projects</a>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-const Right = ({ resumeURL }) => {
+const Right = ({ about, experience, projects, resumeURL }) => {
   return (
     <div className="right">
       <div className="right-inner">
-        <div className="introduction">
-          <h4>Intro</h4>
+        <div className="introduction" id="about">
+          <h4>About</h4>
           <div className="content">
-            <p className="intro-p">I am a passionate Artificial Intelligence and Data Science graduate student with strong experience in data modeling, ETL pipeline development, and machine learning.</p>
-            <p className="intro-p">I build scalable data flows and enable data-driven insights using Python, SQL, and modern frameworks.</p>
-            <span className="intro-p job-pls">Currently pursuing AI at Loyalist College, I am seeking opportunities to contribute to data engineering teams.</span>
+            <p className="intro-p">{about}</p>
           </div>
         </div>
-        <div className="skills">
-          <h4>Skills</h4>
-          <div className="content">
-            <div className="skill-category">
-              <strong>Languages: &nbsp;</strong>
-              <span>Python, SQL, Data Modeling, ETL/ELT Processes</span>
-            </div>
-            <div className="skill-category">
-              <strong>Frameworks &amp; Tools: &nbsp;</strong>
-              <span>Streamlit, Docker, Git, Jupyter Notebook</span>
-            </div>
-          </div>
-        </div>
-        <div className="education">
-          <h4>Education</h4>
-          <div className="content">
-            <div className="university"><a href="https://www.loyalistcollege.com/" target="_blank">Loyalist College</a></div>
-            <div className="major"><strong>Major:</strong> Artificial Intelligence & Data Science</div>
-            <div className="grad-date">Expected Graduation: May 2025</div>
-          </div>
-        </div>
-        <div className="experience">
+        <div className="experience" id="experience">
           <h4>Experience</h4>
-          <div className="content">
-            <div className="exp-item">
-              <div className="job">
-                <a className="company" href="https://www.example.com/" target="_blank">Food Basics</a>
-                <div className="duration">Aug 2023 &mdash; Present</div>
+          {experience.map((section, index) => (
+            <div key={index}>
+              <h5>{section.title}</h5>
+              <div className="content">
+                {section.jobs.map((job, jobIndex) => (
+                  <div className="exp-item" key={jobIndex}>
+                    <div className="job">
+                      <a className="company" href="https://www.example.com/" target="_blank">{job.company}</a>
+                      <div className="duration">{job.duration}</div>
+                    </div>
+                    <div className="title">{job.position}</div>
+                    <ul className="description">
+                      {job.description.map((desc, descIndex) => (
+                        <li key={descIndex}>{desc}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
               </div>
-              <div className="title">Cashier</div>
-              <ul className="description">
-                <li>Provided exceptional customer service and processed transactions efficiently.</li>
-              </ul>
             </div>
-            <div className="exp-item">
-              <div className="job">
-                <a className="company" href="https://www.example.com/" target="_blank">Scanport Limited</a>
-                <div className="duration">Dec 2023 &mdash; Mar 2024</div>
-              </div>
-              <div className="title">Operations Manager</div>
-              <ul className="description">
-                <li>Oversaw container scanning operations ensuring compliance with safety standards.</li>
-                <li>Collaborated with stakeholders to improve operational efficiency.</li>
-              </ul>
-            </div>
-          </div>
+          ))}
         </div>
-        <div className="projects">
+        <div className="projects" id="projects">
           <h4>Projects</h4>
           <div className="content">
-            <div className="project-item">
-              <a className="project-title" href="https://github.com/cliffordaddison/Weather-Forecasting" target="_blank">Weather Forecasting with ML</a>
-              <p className="project-desc">Real-time weather forecasting with SHAP-based model interpretability and an interactive Streamlit interface.</p>
-            </div>
-            <div className="project-item">
-              <a className="project-title" href="https://github.com/cliffordaddison/Fake-News-Prediction" target="_blank">Fake News Detection (NLP)</a>
-              <p className="project-desc">Compared TF-IDF SVM, RNN, GRU & LSTM using word embeddings for robust fake news detection.</p>
-            </div>
+            {projects.map((project, index) => (
+              <div className="project-item" key={index}>
+                <a className="project-title" href={project.link} target="_blank">{project.title}</a>
+                <p className="project-desc">{project.description}</p>
+              </div>
+            ))}
           </div>
         </div>
         <a className="resume" href={resumeURL} target="_blank"><div className="resume-link">Grab a PDF of my full resume</div></a>

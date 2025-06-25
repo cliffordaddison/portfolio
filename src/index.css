@@ -31,7 +31,7 @@ a {
 }
 
 .left .bg-img {
-  background: url('../img/headshot1-bw.png') center center no-repeat;
+  background: url('public/assets/clifford.jpg') center center no-repeat;
   background-size: cover;
   height: 100%;
   width: 100%;
@@ -42,24 +42,8 @@ a {
   left: 0;
 }
 
-.left .bg-img:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: #185a9d;
-  background-image: linear-gradient(to left top, #43cea2 , #185a9d);
-  opacity: 0.85;
-}
-
-.left-inner,
-.right-inner {
-  padding: 50px;
-}
-
 .left-inner {
+  padding: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,15 +51,10 @@ a {
 }
 
 .left .info {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
   color: #fff;
   width: 90%;
   margin: 0 auto;
-  margin-top: 50%;
 }
 
 .left .info .name {
@@ -92,8 +71,28 @@ a {
   color: #fff;
 }
 
+.left .nav-links {
+  margin-top: 20px;
+}
+
+.left .nav-item {
+  margin: 0 10px;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.left .nav-item:hover {
+  color: #33E5BB;
+}
+
 .right {
   float: right;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.right-inner {
+  padding: 50px;
 }
 
 .right h4 {
@@ -130,6 +129,10 @@ a {
 
 .right .projects .project-item {
   margin-bottom: 20px;
+}
+
+.right .projects .project-title {
+  font-weight: 700;
 }
 
 .right a.resume {
