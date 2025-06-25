@@ -10,6 +10,7 @@ export default function Home() {
   const aboutRef = useRef(null);
   const experienceRef = useRef(null);
   const projectsRef = useRef(null);
+  const cursorRef = useRef(null);
 
   useEffect(() => {
     setMounted(true);
@@ -26,8 +27,20 @@ export default function Home() {
       }
     };
 
+    const handleMouseMove = (e) => {
+      if (cursorRef.current) {
+        cursorRef.current.style.left = `${e.clientX}px`;
+        cursorRef.current.style.top = `${e.clientY}px`;
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
 
   const toggleMobileMenu = () => {
@@ -40,12 +53,13 @@ export default function Home() {
     name: "Clifford Addison",
     subtext: "Artificial Intelligence & Data Engineering | Scalable Pipelines | Predictive Analytics | Data Infrastructure",
     jobStatus: "AI Student @ Loyalist College",
+    jobStatusLink: "http://loyalistcollege.com/",
     twitterURL: 'https://twitter.com/',
     instaURL: 'https://instagram.com/',
     githubURL: 'https://github.com/cliffordaddison',
     linkedinURL: 'https://www.linkedin.com/in/cliffordaddison',
     resumeURL: 'https://drive.usercontent.google.com/u/0/uc?id=19AKkU14qt_3w5grRQAdEcEvMetZ2KIO7&export=download',
-    about: "I'm a passionate Artificial Intelligence and Data Science graduate student with strong experience in data modeling, ETL pipeline development, and machine learning. I aim to contribute to Hootsuite's data engineering team through technical rigor and collaborative energy.",
+    about: "I'm a passionate Artificial Intelligence and Data Science graduate student with strong experience in data modeling, ETL pipeline development, and machine learning. I aim to contribute to a promising data engineering team through technical rigor and collaborative energy.",
     experience: [
       {
         title: "Professional Experience",
@@ -153,16 +167,25 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-navy text-slate-300 font-sans">
+    <div className="min-h-screen bg-navy text-slate-300 font-sans cursor-none">
+      {/* Custom cursor with rings */}
+      <div 
+        ref={cursorRef}
+        className="fixed pointer-events-none z-50 transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
+      >
+        <div className="absolute w-4 h-4 rounded-full bg-white opacity-20 transform -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute w-8 h-8 rounded-full border-2 border-blue-400 opacity-30 animate-ping-slow transform -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute w-12 h-12 rounded-full border-2 border-purple-400 opacity-20 animate-ping-slower transform -translate-x-1/2 -translate-y-1/2"></div>
+      </div>
+
       {/* Navbar */}
-      <nav className="fixed w-full bg-navy/90 backdrop-blur-sm z-50 border-b border-slate-800">
+      <nav className="fixed w-full bg-navy/90 backdrop-blur-sm z-40 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-8 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center">
               <div className="w-10 h-10 rounded-full bg-green flex items-center justify-center mr-4">
                 <span className="text-navy font-bold">CA</span>
               </div>
-              <span className="text-green font-mono text-sm">ca</span>
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
@@ -247,6 +270,7 @@ export default function Home() {
             name={DATA.name}
             subtext={DATA.subtext}
             jobStatus={DATA.jobStatus}
+            jobStatusLink={DATA.jobStatusLink}
             twitterURL={DATA.twitterURL}
             instaURL={DATA.instaURL}
             githubURL={DATA.githubURL}
@@ -267,7 +291,7 @@ export default function Home() {
   );
 }
 
-const Left = ({ name, subtext, jobStatus, twitterURL, instaURL, githubURL, linkedinURL }) => {
+const Left = ({ name, subtext, jobStatus, jobStatusLink, twitterURL, instaURL, githubURL, linkedinURL }) => {
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true
@@ -285,20 +309,22 @@ const Left = ({ name, subtext, jobStatus, twitterURL, instaURL, githubURL, linke
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">{name}</h1>
           <h2 className="text-lg text-green mb-4">{subtext}</h2>
-          <p className="text-slate-400">{jobStatus}</p>
+          <p className="text-slate-400">
+            <a href={jobStatusLink} target="_blank" rel="noreferrer" className="hover:text-green transition-colors">
+              {jobStatus}
+            </a>
+          </p>
         </div>
 
         <div className="w-48 h-48 rounded-full overflow-hidden mb-8 mx-auto md:mx-0 border-2 border-green/30 relative group">
           <img 
-            src="/clifford.jpg" 
+            src="public/assets/clifford.jpg" 
             alt="Clifford Addison" 
             className="w-full h-full object-cover"
           />
-          {/* Ripple effect overlay */}
+          {/* Subtle glow effect */}
           <div className="absolute inset-0 rounded-full overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <div className="absolute inset-0 bg-green/10 animate-[ripple_3s_linear_infinite]"></div>
-            <div className="absolute inset-0 bg-green/10 animate-[ripple_3s_linear_infinite_1s]"></div>
-            <div className="absolute inset-0 bg-green/10 animate-[ripple_3s_linear_infinite_2s]"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 via-purple-400/10 to-green/10"></div>
           </div>
         </div>
 
@@ -306,17 +332,17 @@ const Left = ({ name, subtext, jobStatus, twitterURL, instaURL, githubURL, linke
           <ul className="space-y-2">
             <li>
               <a href="#about" className="text-slate-400 hover:text-green transition-colors flex items-center">
-                <span className="text-green mr-2">01.</span> About
+                <span className="text-green mr-2">——</span> About
               </a>
             </li>
             <li>
               <a href="#experience" className="text-slate-400 hover:text-green transition-colors flex items-center">
-                <span className="text-green mr-2">02.</span> Experience
+                <span className="text-green mr-2">——</span> Experience
               </a>
             </li>
             <li>
               <a href="#projects" className="text-slate-400 hover:text-green transition-colors flex items-center">
-                <span className="text-green mr-2">03.</span> Projects
+                <span className="text-green mr-2">——</span> Projects
               </a>
             </li>
           </ul>
@@ -405,7 +431,7 @@ const Right = ({ about, experience, projects, resumeURL, aboutRef, experienceRef
                     animate={inView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.4, delay: 0.2 + (jobIndex * 0.1) }}
                   >
-                    <div className="absolute left-0 top-1 h-3 w-3 rounded-full bg-green group-hover:animate-pulse"></div>
+                    <div className="absolute left-0 top-1 h-3 w-3 rounded-full bg-green group-hover:opacity-80 transition-opacity"></div>
                     <div className="absolute left-1.5 top-4 bottom-0 w-px bg-slate-600"></div>
                     
                     <div className="mb-2">
@@ -452,11 +478,9 @@ const Right = ({ about, experience, projects, resumeURL, aboutRef, experienceRef
               transition={{ duration: 0.4, delay: 0.2 + (index * 0.1) }}
               whileHover={{ y: -5 }}
             >
-              {/* Ripple effect background */}
+              {/* Subtle glow effect */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute -inset-2 bg-green/10 rounded-lg animate-[ripple_3s_linear_infinite]"></div>
-                <div className="absolute -inset-2 bg-green/10 rounded-lg animate-[ripple_3s_linear_infinite_1s]"></div>
-                <div className="absolute -inset-2 bg-green/10 rounded-lg animate-[ripple_3s_linear_infinite_2s]"></div>
+                <div className="absolute -inset-2 bg-gradient-to-br from-blue-400/10 via-purple-400/10 to-green/10 rounded-lg"></div>
               </div>
               
               <div className="relative z-10">
@@ -495,11 +519,9 @@ const Right = ({ about, experience, projects, resumeURL, aboutRef, experienceRef
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          {/* Ripple effect */}
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100">
-            <div className="absolute inset-0 bg-green/10 animate-[ripple_3s_linear_infinite]"></div>
-            <div className="absolute inset-0 bg-green/10 animate-[ripple_3s_linear_infinite_1s]"></div>
-            <div className="absolute inset-0 bg-green/10 animate-[ripple_3s_linear_infinite_2s]"></div>
+          {/* Subtle glow effect */}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 via-purple-400/10 to-green/10"></div>
           </div>
           <span className="relative z-10 flex items-center">
             <ArrowDownToLine size={18} className="mr-2" />
