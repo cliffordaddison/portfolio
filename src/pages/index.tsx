@@ -298,7 +298,7 @@ const Left = ({ name, subtext, jobStatus, jobStatusLink, twitterURL, instaURL, g
 
         <div className="w-48 h-48 rounded-full overflow-hidden mb-8 mx-auto md:mx-0 border-2 border-green/30 relative group">
           <img 
-            src="/assets/clifford.jpg"
+            src="https://drive.google.com/file/d/1_7xWOG6MYhY3hUi-Bq5aszZWJ_rOqyBc/view?usp=sharing"
             alt="Clifford Addison"
             className="w-full h-full object-cover"
           />
