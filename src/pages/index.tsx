@@ -296,15 +296,24 @@ const Left = ({ name, subtext, jobStatus, jobStatusLink, twitterURL, instaURL, g
           </p>
         </div>
 
-        <div className="w-48 h-48 bg-red-500 rounded-full overflow-hidden mb-8">
+        <div className="w-48 h-48 rounded-full overflow-hidden mb-8 mx-auto md:mx-0 border-2 border-green/30 relative group">
+          {/* Debug overlay (temporary - remove after verification) */}
+          <div className="absolute inset-0 bg-red-500/20 z-0" style={{ display: 'none' }}></div>
+          
+          {/* Corrected image with proper URL */}
           <img 
-            src="https://ibb.co/4R4Txg2q"
+            src="https://ibb.co/4R4Txg2q" 
             alt="Clifford Addison"
-            className="w-full h-full object-cover"
+            className="relative z-10 w-full h-full object-cover"
           />
-          {/* Moved glow effect INSIDE the image container */}
+          {/* Glow effect */}
           <div className="absolute inset-0 rounded-full overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 via-purple-400/10 to-green/10"></div>
+          </div>
+
+          {/* Fallback text (hidden by default) */}
+          <div className="debug-overlay absolute inset-0 flex items-center justify-center text-red-500 z-20" style={{ display: 'none' }}>
+            Image failed to load - Check URL
           </div>
         </div>
 
