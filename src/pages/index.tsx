@@ -290,7 +290,7 @@ const Left = ({ name, subtext, jobStatus, jobStatusLink, twitterURL, instaURL, g
           <h1 className="text-3xl font-bold text-white mb-2">{name}</h1>
           <h2 className="text-lg text-green mb-4">{subtext}</h2>
           <p className="text-slate-400">
-            <a href={jobStatusLink} target="_blank" rel="noreferrer" className="text-green hover:underline transition-colors">
+            <a href={jobStatusLink} target="_blank" rel="noreferrer" className="text-white hover:underline transition-colors">
               {jobStatus}
             </a>
           </p>
@@ -298,7 +298,7 @@ const Left = ({ name, subtext, jobStatus, jobStatusLink, twitterURL, instaURL, g
 
         <div className="w-48 h-48 rounded-full overflow-hidden mb-8 mx-auto md:mx-0 border-2 border-green/30 relative group">
           <img 
-            src="https://drive.google.com/file/d/1_7xWOG6MYhY3hUi-Bq5aszZWJ_rOqyBc/view?usp=sharing"
+            src="https://ibb.co/4R4Txg2q"
             alt="Clifford Addison"
             className="w-full h-full object-cover"
           />
