@@ -167,7 +167,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-navy text-slate-300 font-sans cursor-none">
+    <div className="min-h-screen bg-navy text-slate-300 font-sans">
       {/* Custom cursor with rings */}
       <div 
         ref={cursorRef}
@@ -331,18 +331,18 @@ const Left = ({ name, subtext, jobStatus, jobStatusLink, twitterURL, instaURL, g
         <nav className="mb-8">
           <ul className="space-y-2">
             <li>
-              <a href="#about" className="text-slate-400 hover:text-green transition-colors flex items-center">
-                <span className="text-green mr-2">——</span> About
+              <a href="#about" className="text-slate-400 hover:text-green transition-colors flex items-center group">
+                <span className="text-green mr-2 group-hover:w-12 group-active:w-12 w-8 transition-all duration-300 overflow-hidden">————</span> About
               </a>
             </li>
             <li>
-              <a href="#experience" className="text-slate-400 hover:text-green transition-colors flex items-center">
-                <span className="text-green mr-2">——</span> Experience
+              <a href="#experience" className="text-slate-400 hover:text-green transition-colors flex items-center group">
+                <span className="text-green mr-2 group-hover:w-12 group-active:w-12 w-8 transition-all duration-300 overflow-hidden">————</span> Experience
               </a>
             </li>
             <li>
-              <a href="#projects" className="text-slate-400 hover:text-green transition-colors flex items-center">
-                <span className="text-green mr-2">——</span> Projects
+              <a href="#projects" className="text-slate-400 hover:text-green transition-colors flex items-center group">
+                <span className="text-green mr-2 group-hover:w-12 group-active:w-12 w-8 transition-all duration-300 overflow-hidden">————</span> Projects
               </a>
             </li>
           </ul>
