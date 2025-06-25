@@ -302,7 +302,7 @@ const Left = ({ name, subtext, jobStatus, jobStatusLink, twitterURL, instaURL, g
           
           {/* Corrected image with proper URL */}
           <img 
-            src="https://ibb.co/4R4Txg2q" 
+            src="assets/clifford.jpg" 
             alt="Clifford Addison"
             className="relative z-10 w-full h-full object-cover"
           />
