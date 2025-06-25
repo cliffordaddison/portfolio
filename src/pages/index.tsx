@@ -296,7 +296,7 @@ const Left = ({ name, subtext, jobStatus, jobStatusLink, twitterURL, instaURL, g
           </p>
         </div>
 
-        <div className="w-48 h-48 rounded-full overflow-hidden mb-8 mx-auto md:mx-0 border-2 border-green/30 relative group">
+        <div className="w-48 h-48 bg-red-500 rounded-full overflow-hidden mb-8">
           <img 
             src="https://ibb.co/4R4Txg2q"
             alt="Clifford Addison"
