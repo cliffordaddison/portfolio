@@ -290,7 +290,7 @@ const Left = ({ name, subtext, jobStatus, jobStatusLink, twitterURL, instaURL, g
           <h1 className="text-3xl font-bold text-white mb-2">{name}</h1>
           <h2 className="text-lg text-green mb-4">{subtext}</h2>
           <p className="text-slate-400">
-            <a href={jobStatusLink} target="_blank" rel="noreferrer" className="hover:text-green transition-colors">
+            <a href={jobStatusLink} target="_blank" rel="noreferrer" className="text-green hover:underline transition-colors">
               {jobStatus}
             </a>
           </p>
@@ -302,8 +302,7 @@ const Left = ({ name, subtext, jobStatus, jobStatusLink, twitterURL, instaURL, g
             alt="Clifford Addison"
             className="w-full h-full object-cover"
           />
-        </div>
-          {/* Subtle glow effect */}
+          {/* Moved glow effect INSIDE the image container */}
           <div className="absolute inset-0 rounded-full overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 via-purple-400/10 to-green/10"></div>
           </div>
