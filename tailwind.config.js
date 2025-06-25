@@ -1,7 +1,20 @@
 module.exports = {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        navy: '#0a192f',
+        slate: '#8892b0',
+        'slate-light': '#ccd6f6',
+        green: '#64ffda',
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        mono: ['Fira Code', 'monospace'],
+      },
+    },
   },
   plugins: [],
-};
+}

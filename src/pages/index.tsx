@@ -16,7 +16,7 @@ export default function Home() {
     githubURL: 'https://github.com/cliffordaddison',
     linkedinURL: 'https://www.linkedin.com/in/cliffordaddison',
     resumeURL: 'https://drive.usercontent.google.com/u/0/uc?id=19AKkU14qt_3w5grRQAdEcEvMetZ2KIO7&export=download',
-    about: "I’m a passionate Artificial Intelligence and Data Science graduate student with strong experience in data modeling, ETL pipeline development, and machine learning. I aim to contribute to Hootsuite's data engineering team through technical rigor and collaborative energy.",
+    about: "I'm a passionate Artificial Intelligence and Data Science graduate student with strong experience in data modeling, ETL pipeline development, and machine learning. I aim to contribute to Hootsuite's data engineering team through technical rigor and collaborative energy.",
     experience: [
       {
         title: "Part-Time Experience in Canada",
@@ -83,7 +83,7 @@ export default function Home() {
       {
         title: "Scalable Yelp Review Pipeline",
         link: "https://github.com/cliffordaddison/Scalable-Yelp-Review-Pipeline",
-        description: "Designed an end-to-end machine learning pipeline integrating image metadata and text features from Yelp’s 3.4M+ business reviews using Python and SQL."
+        description: "Designed an end-to-end machine learning pipeline integrating image metadata and text features from Yelp's 3.4M+ business reviews using Python and SQL."
       },
       {
         title: "Weather Forecasting Using Machine Learning",
@@ -124,46 +124,73 @@ export default function Home() {
   };
 
   return (
-    <div className="app">
-      <Left
-        name={DATA.name}
-        subtext={DATA.subtext}
-        jobStatus={DATA.jobStatus}
-        twitterURL={DATA.twitterURL}
-        instaURL={DATA.instaURL}
-        githubURL={DATA.githubURL}
-        linkedinURL={DATA.linkedinURL}
-      />
-      <Right 
-        about={DATA.about}
-        experience={DATA.experience}
-        projects={DATA.projects}
-        resumeURL={DATA.resumeURL}
-      />
+    <div className="min-h-screen bg-navy text-slate-300 font-sans">
+      <div className="max-w-7xl mx-auto px-8 py-16 md:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+          <Left
+            name={DATA.name}
+            subtext={DATA.subtext}
+            jobStatus={DATA.jobStatus}
+            twitterURL={DATA.twitterURL}
+            instaURL={DATA.instaURL}
+            githubURL={DATA.githubURL}
+            linkedinURL={DATA.linkedinURL}
+          />
+          <Right 
+            about={DATA.about}
+            experience={DATA.experience}
+            projects={DATA.projects}
+            resumeURL={DATA.resumeURL}
+          />
+        </div>
+      </div>
     </div>
   );
 }
 
 const Left = ({ name, subtext, jobStatus, twitterURL, instaURL, githubURL, linkedinURL }) => {
   return (
-    <div className="left">
-      <div className="bg-img" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/assets/clifford.jpg)` }}></div>
-      <div className="left-inner">
-        <div className="info">
-          <h2 className="name">{name}</h2>
-          <div className="subtext">{subtext}</div>
-          <div className="jobStatus">{jobStatus}</div>
-          <div className="social-links">
-            <a href={twitterURL} target="_blank"><i className="fa fa-twitter"></i></a>
-            <a href={instaURL} target="_blank"><i className="fa fa-instagram"></i></a>
-            <a href={githubURL} target="_blank"><i className="fa fa-github"></i></a>
-            <a href={linkedinURL} target="_blank"><i className="fa fa-linkedin"></i></a>
-          </div>
-          <div className="nav-links">
-            <a href="#about" className="nav-item">About</a>
-            <a href="#experience" className="nav-item">Experience</a>
-            <a href="#projects" className="nav-item">Projects</a>
-          </div>
+    <div className="md:col-span-5 lg:col-span-4 relative">
+      <div className="md:sticky md:top-28">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-white mb-2">{name}</h1>
+          <h2 className="text-lg text-green mb-4">{subtext}</h2>
+          <p className="text-slate-400">{jobStatus}</p>
+        </div>
+
+        <nav className="mb-8">
+          <ul className="space-y-2">
+            <li>
+              <a href="#about" className="text-slate-400 hover:text-green transition-colors flex items-center">
+                <span className="text-green mr-2">01.</span> About
+              </a>
+            </li>
+            <li>
+              <a href="#experience" className="text-slate-400 hover:text-green transition-colors flex items-center">
+                <span className="text-green mr-2">02.</span> Experience
+              </a>
+            </li>
+            <li>
+              <a href="#projects" className="text-slate-400 hover:text-green transition-colors flex items-center">
+                <span className="text-green mr-2">03.</span> Projects
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div className="flex space-x-4">
+          <a href={githubURL} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-green transition-colors">
+            <Github size={20} />
+          </a>
+          <a href={linkedinURL} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-green transition-colors">
+            <Linkedin size={20} />
+          </a>
+          <a href={twitterURL} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-green transition-colors">
+            <Twitter size={20} />
+          </a>
+          <a href={instaURL} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-green transition-colors">
+            <Instagram size={20} />
+          </a>
         </div>
       </div>
     </div>
@@ -172,28 +199,38 @@ const Left = ({ name, subtext, jobStatus, twitterURL, instaURL, githubURL, linke
 
 const Right = ({ about, experience, projects, resumeURL }) => {
   return (
-    <div className="right">
-      <div className="right-inner">
-        <div className="introduction" id="about">
-          <h4>About</h4>
-          <div className="content">
-            <p className="intro-p">{about}</p>
-          </div>
+    <div className="md:col-span-7 lg:col-span-8">
+      <section id="about" className="mb-16">
+        <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+          <span className="text-green mr-2 text-lg font-mono">01.</span> About Me
+        </h2>
+        <div className="text-slate-400 space-y-4">
+          <p>{about}</p>
         </div>
-        <div className="experience" id="experience">
-          <h4>Experience</h4>
+      </section>
+
+      <section id="experience" className="mb-16">
+        <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+          <span className="text-green mr-2 text-lg font-mono">02.</span> Experience
+        </h2>
+        <div className="space-y-8">
           {experience.map((section, index) => (
             <div key={index}>
-              <h5>{section.title}</h5>
-              <div className="content">
+              <h3 className="text-xl font-semibold text-slate-300 mb-4">{section.title}</h3>
+              <div className="space-y-6">
                 {section.jobs.map((job, jobIndex) => (
-                  <div className="exp-item" key={jobIndex}>
-                    <div className="job">
-                      <a className="company" href="https://www.example.com/" target="_blank">{job.company}</a>
-                      <div className="duration">{job.duration}</div>
+                  <div key={jobIndex} className="relative pl-8">
+                    <div className="absolute left-0 top-1 h-3 w-3 rounded-full bg-green"></div>
+                    <div className="absolute left-1.5 top-4 bottom-0 w-px bg-slate-600"></div>
+                    
+                    <div className="mb-2">
+                      <h4 className="text-lg font-medium text-white">
+                        {job.position} <span className="text-green">@ {job.company}</span>
+                      </h4>
+                      <p className="text-sm text-slate-400">{job.duration}</p>
                     </div>
-                    <div className="title">{job.position}</div>
-                    <ul className="description">
+                    
+                    <ul className="list-disc list-inside text-slate-400 space-y-2">
                       {job.description.map((desc, descIndex) => (
                         <li key={descIndex}>{desc}</li>
                       ))}
@@ -204,18 +241,45 @@ const Right = ({ about, experience, projects, resumeURL }) => {
             </div>
           ))}
         </div>
-        <div className="projects" id="projects">
-          <h4>Projects</h4>
-          <div className="content">
-            {projects.map((project, index) => (
-              <div className="project-item" key={index}>
-                <a className="project-title" href={project.link} target="_blank">{project.title}</a>
-                <p className="project-desc">{project.description}</p>
+      </section>
+
+      <section id="projects" className="mb-16">
+        <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+          <span className="text-green mr-2 text-lg font-mono">03.</span> Projects
+        </h2>
+        <div className="grid grid-cols-1 gap-6">
+          {projects.map((project, index) => (
+            <div key={index} className="bg-slate-800 rounded-lg p-6 hover:bg-slate-700 transition-colors">
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="text-lg font-medium text-white">
+                  <a href={project.link} target="_blank" rel="noreferrer" className="hover:text-green transition-colors">
+                    {project.title}
+                  </a>
+                </h3>
+                <a href={project.link} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-green transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
               </div>
-            ))}
-          </div>
+              <p className="text-slate-400">{project.description}</p>
+            </div>
+          ))}
         </div>
-        <a className="resume" href={resumeURL} target="_blank"><div className="resume-link">Grab a PDF of my full resume</div></a>
+      </section>
+
+      <div className="text-center">
+        <a 
+          href={resumeURL} 
+          target="_blank" 
+          rel="noreferrer"
+          className="inline-flex items-center px-6 py-3 border border-green text-green rounded hover:bg-green/10 transition-colors"
+        >
+          <ArrowDownToLine size={18} className="mr-2" />
+          Download Resume
+        </a>
       </div>
     </div>
   );
