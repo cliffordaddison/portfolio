@@ -1,174 +1,169 @@
-import { useEffect, useState } from "react";
-import { ArrowDownToLine } from "lucide-react";
-import { Button } from "../components/ui/button";
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
+import { useState, useEffect } from "react";
+import { ArrowDownToLine, Github, Linkedin, Twitter, Instagram } from "lucide-react";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  const particlesInit = async (main) => {
-    await loadFull(main);
-  };
-
   if (!mounted) return null;
 
   return (
-    <main className="min-h-screen bg-gray-900 text-white font-sans relative overflow-hidden">
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        options={{
-          fullScreen: { enable: false },
-          background: { color: { value: "#1a202c" } },
-          fpsLimit: 60,
-          interactivity: {
-            events: {
-              onHover: { enable: true, mode: "repulse" },
-              resize: true,
-            },
-            modes: {
-              repulse: { distance: 100, duration: 0.4 },
-            },
-          },
-          particles: {
-            color: { value: "#00bcd4" },
-            links: {
-              color: "#00bcd4",
-              distance: 150,
-              enable: true,
-              opacity: 0.5,
-              width: 1,
-            },
-            collisions: { enable: true },
-            move: {
-              direction: "none",
-              enable: true,
-              outModes: { default: "bounce" },
-              random: false,
-              speed: 2,
-              straight: false,
-            },
-            number: { density: { enable: true, area: 800 }, value: 80 },
-            opacity: { value: 0.5 },
-            shape: { type: "circle" },
-            size: { value: { min: 1, max: 5 } },
-          },
-          detectRetina: true,
-        }}
-        className="absolute top-0 left-0 w-full h-full z-0"
-      />
-
-      <div className="relative z-10">
-        {/* Hero Section */}
-        <section className="flex flex-col justify-center items-center text-center p-8 md:p-16 max-w-3xl mx-auto">
-          <img
-            src="/assets/clifford.jpg"
-            alt="Clifford Addison"
-            className="w-40 h-40 object-cover rounded-full border-4 border-cyan-400 mb-6"
+    <div className="min-h-screen flex flex-col md:flex-row font-sans bg-white">
+      {/* Left Side */}
+      <div className="left relative w-full md:w-1/2 h-[400px] md:h-screen text-center overflow-hidden flex-shrink-0">
+        {/* Background image and gradient overlay */}
+        <div
+          className="absolute inset-0 bg-center bg-cover"
+          style={{
+            backgroundImage: "url('/assets/clifford.jpg')",
+          }}
+        >
+          <div className="absolute inset-0"
+            style={{
+              background: "linear-gradient(to left top, #43cea2, #185a9d)",
+              opacity: 0.85,
+            }}
           />
-          <h1 className="text-5xl md:text-6xl font-bold mb-3 bg-gradient-to-r from-teal-400 to-blue-500 text-transparent bg-clip-text">
-            Clifford Addison
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-4">
-            AI & Data Science Enthusiast based in Toronto, Canada
-          </p>
+        </div>
+        {/* Centered Info */}
+        <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 py-12">
+          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-2">Hey, I'm Clifford</h2>
+          <div className="text-lg md:text-xl text-white mb-2">Data Analyst & AI Enthusiast</div>
+          <div className="text-base text-white mb-6">AI Student @ Loyalist College</div>
+          <div className="flex justify-center gap-4 mt-4">
+            <a href="https://github.com/cliffordaddison" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <Github className="w-6 h-6 text-white hover:text-[#43cea2] transition-all duration-300" />
+            </a>
+            <a href="https://www.linkedin.com/in/cliffordaddison" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <Linkedin className="w-6 h-6 text-white hover:text-[#43cea2] transition-all duration-300" />
+            </a>
+            <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+              <Twitter className="w-6 h-6 text-white hover:text-[#43cea2] transition-all duration-300" />
+            </a>
+            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <Instagram className="w-6 h-6 text-white hover:text-[#43cea2] transition-all duration-300" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Side */}
+      <div className="right w-full md:w-1/2 ml-auto px-6 md:px-12 py-10 bg-white overflow-y-auto">
+        <div className="right-inner max-w-2xl mx-auto">
+          {/* Introduction */}
+          <section className="introduction mb-10">
+            <h4 className="uppercase text-sm font-bold bg-gradient-to-r from-[#2A54F5] to-[#33E5BB] bg-clip-text text-transparent mb-2">Intro</h4>
+            <div className="content text-gray-800 text-base leading-relaxed">
+              <p className="intro-p mb-2">
+                I have a background in transportation logistics and operations management, with a strong transition into data science, AI, and machine learning.
+              </p>
+              <p className="intro-p mb-2">
+                I enjoy crafting end-to-end solutions using Python, SQL, and modern frameworks like React and Tailwind CSS.
+              </p>
+              <span className="intro-p job-pls font-medium bg-gradient-to-r from-[#2A54F5] to-[#33E5BB] bg-clip-text text-transparent">
+                I’m currently pursuing AI at Loyalist College and looking for internship or co-op opportunities! My expected graduation date is December 2025.
+              </span>
+            </div>
+          </section>
+
+          {/* Skills */}
+          <section className="skills mb-10">
+            <h4 className="uppercase text-sm font-bold bg-gradient-to-r from-[#2A54F5] to-[#33E5BB] bg-clip-text text-transparent mb-2">Skills</h4>
+            <div className="content text-gray-800">
+              <div className="skill-category mb-2">
+                <strong className="uppercase text-xs">Languages: </strong>
+                <span>Python, SQL, JavaScript, HTML5, CSS3</span>
+              </div>
+              <div className="skill-category mb-2">
+                <strong className="uppercase text-xs">Frameworks: </strong>
+                <span>React, Tailwind CSS, Streamlit, scikit-learn</span>
+              </div>
+              <div className="skill-category">
+                <strong className="uppercase text-xs">Tools: </strong>
+                <span>Git, VSCode, Jupyter, Tableau</span>
+              </div>
+            </div>
+          </section>
+
+          {/* Education */}
+          <section className="education mb-10">
+            <h4 className="uppercase text-sm font-bold bg-gradient-to-r from-[#2A54F5] to-[#33E5BB] bg-clip-text text-transparent mb-2">Education</h4>
+            <div className="content text-gray-800">
+              <div className="university font-bold text-base mb-1">
+                <a href="https://www.loyalistcollege.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">Loyalist College</a>
+              </div>
+              <div className="college italic font-bold mb-1">
+                School of Applied Sciences
+              </div>
+              <div className="major mb-1">
+                <strong>Major:</strong> Artificial Intelligence & Data Science
+              </div>
+              <div className="minor mb-1">
+                <strong>Minor:</strong> Operations Management
+              </div>
+              <div className="grad-date uppercase text-xs text-gray-400 font-medium mt-2">
+                Expected Graduation: December 2025
+              </div>
+            </div>
+          </section>
+
+          {/* Experience */}
+          <section className="experience mb-10">
+            <h4 className="uppercase text-sm font-bold bg-gradient-to-r from-[#2A54F5] to-[#33E5BB] bg-clip-text text-transparent mb-2">Experience</h4>
+            <div className="content text-gray-800">
+              <div className="exp-item mb-6">
+                <div className="job font-bold">
+                  <a href="https://www.example.com/" target="_blank" rel="noopener noreferrer" className="company hover:underline">Example Company</a>
+                  <div className="duration float-right text-xs font-medium text-gray-400 uppercase relative top-1 mb-1">Jan 2024 – Present</div>
+                </div>
+                <div className="title italic font-bold mb-1">Data Analyst Intern</div>
+                <ul className="description list-disc pl-5 text-sm">
+                  <li>Analyzed logistics data to optimize delivery routes and reduce costs by 15%.</li>
+                  <li>Developed dashboards in Tableau for real-time KPI monitoring.</li>
+                </ul>
+              </div>
+              {/* Add more exp-item blocks as needed */}
+            </div>
+          </section>
+
+          {/* Projects */}
+          <section className="projects mb-10">
+            <h4 className="uppercase text-sm font-bold bg-gradient-to-r from-[#2A54F5] to-[#33E5BB] bg-clip-text text-transparent mb-2">Projects</h4>
+            <div className="content text-gray-800">
+              <div className="project-item mb-5">
+                <a className="project-title font-bold hover:underline" href="https://github.com/cliffordaddison/Weather-Forecasting" target="_blank" rel="noopener noreferrer">
+                  Weather Forecasting ML Model
+                </a>
+                <p className="project-desc text-sm mb-2">
+                  Built a machine learning model to forecast weather using Python, scikit-learn, and real-time meteorological data. Applied model validation, hyperparameter tuning, and visualization.
+                </p>
+              </div>
+              <div className="project-item mb-5">
+                <a className="project-title font-bold hover:underline" href="https://github.com/cliffordaddison/Fake-News-Prediction" target="_blank" rel="noopener noreferrer">
+                  Fake News Detection App
+                </a>
+                <p className="project-desc text-sm mb-2">
+                  Developed a Streamlit app using NLP models to detect fake news articles. Integrated TF-IDF, RNN, and GRU-based classification approaches.
+                </p>
+              </div>
+              {/* Add more project-item blocks as needed */}
+            </div>
+          </section>
+
+          {/* Resume Button */}
           <a
+            className="resume block w-full max-w-md mx-auto text-center py-4 bg-gray-100 rounded-lg transition hover:bg-gray-200 mb-6"
             href="https://drive.google.com/file/d/19AKkU14qt_3w5grRQAdEcEvMetZ2KIO7/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Button
-              variant="outline"
-              className="border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black"
-            >
-              <ArrowDownToLine className="w-4 h-4 mr-2" />
-              Download Resume
-            </Button>
+            <div className="resume-link font-bold text-base uppercase bg-gradient-to-r from-[#2A54F5] to-[#33E5BB] bg-clip-text text-transparent flex items-center justify-center gap-2">
+              <ArrowDownToLine className="w-5 h-5" />
+              Grab a PDF of my full resume
+            </div>
           </a>
-        </section>
-
-        {/* About Section */}
-        <section className="bg-gray-800 px-8 py-12 md:py-20">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-semibold mb-4 text-cyan-400">About Me</h2>
-            <p className="text-gray-300 text-lg leading-relaxed">
-              I have a background in transportation logistics and operations management, with a strong transition into data science, AI, and machine learning. I enjoy crafting end-to-end solutions using Python, SQL, and modern frameworks like React and Tailwind CSS. I’m currently pursuing AI at Loyalist College and looking for internship or co-op opportunities.
-            </p>
-          </div>
-        </section>
-
-        {/* Projects */}
-        <section className="bg-gray-900 px-8 py-12 md:py-20">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-semibold mb-4 text-cyan-400">Projects</h2>
-            <ul className="space-y-6">
-              <li>
-                <h3 className="text-xl font-bold">
-                  <a href="https://github.com/cliffordaddison/Weather-Forecasting" className="text-cyan-400 hover:underline">Weather Forecasting ML Model</a>
-                </h3>
-                <p className="text-gray-300">
-                  Built a machine learning model to forecast weather using Python, scikit-learn, and real-time meteorological data. Applied model validation, hyperparameter tuning, and visualization.
-                </p>
-              </li>
-              <li>
-                <h3 className="text-xl font-bold">
-                  <a href="https://github.com/cliffordaddison/Fake-News-Prediction" className="text-cyan-400 hover:underline">Fake News Detection App</a>
-                </h3>
-                <p className="text-gray-300">
-                  Developed a Streamlit app using NLP models to detect fake news articles. Integrated TF-IDF, RNN, and GRU-based classification approaches.
-                </p>
-              </li>
-              <li>
-                <h3 className="text-xl font-bold">
-                  <a href="https://github.com/cliffordaddison/Loan-Eligibility-Prediction" className="text-cyan-400 hover:underline">Loan Eligibility Prediction</a>
-                </h3>
-                <p className="text-gray-300">
-                  Machine learning model to assess loan eligibility using classification algorithms, feature engineering, and pipeline optimization.
-                </p>
-              </li>
-              <li>
-                <h3 className="text-xl font-bold">
-                  <a href="https://github.com/cliffordaddison/Medical-Insurance-Cost-Prediction" className="text-cyan-400 hover:underline">Medical Insurance Cost Prediction</a>
-                </h3>
-                <p className="text-gray-300">
-                  Regression-based analysis of medical cost prediction using scikit-learn and exploratory data visualization with Seaborn.
-                </p>
-              </li>
-              <li>
-                <h3 className="text-xl font-bold">
-                  <a href="https://github.com/cliffordaddison/Customer-Segmentation-with-K-Means-Clustering" className="text-cyan-400 hover:underline">Customer Segmentation</a>
-                </h3>
-                <p className="text-gray-300">
-                  Applied unsupervised machine learning with K-Means clustering to segment customers based on behavior and spending patterns.
-                </p>
-              </li>
-              <li>
-                <h3 className="text-xl font-bold">
-                  <a href="https://github.com/cliffordaddison/2024-US-Elections" className="text-cyan-400 hover:underline">2024 US Elections Analysis</a>
-                </h3>
-                <p className="text-gray-300">
-                  Data storytelling project visualizing polling, demographics, and trends for the upcoming U.S. elections.
-                </p>
-              </li>
-              <li>
-                <h3 className="text-xl font-bold">
-                  <a href="https://github.com/cliffordaddison/Smart_Home_Fire_Alarm_System" className="text-cyan-400 hover:underline">Smart Home Fire Alarm System (IoT)</a>
-                </h3>
-                <p className="text-gray-300">
-                  Built an IoT-based fire alarm system integrating sensors and edge computing for smart safety alerts.
-                </p>
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        {/* Footer */}
-        <footer className="text-center text-sm text-gray-500 py-8">
-          © {new Date().getFullYear()} Clifford Addison. Built with ❤️ using React & Tailwind.
-        </footer>
+        </div>
       </div>
-    </main>
+    </div>
   );
 }
