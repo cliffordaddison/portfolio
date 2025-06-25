@@ -3,32 +3,35 @@
 @tailwind utilities;
 
 
-/* Global Styles */
 html, body {
+  font-family: 'Catamaran', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Catamaran', sans-serif;
-  letter-spacing: 0.3px;
 }
 
 a {
   text-decoration: none;
 }
 
-/* Left Side Styles */
-.left {
-  position: fixed;
+.left,
+.right {
   width: 50%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.left {
+  color: #efefef;
   height: 100%;
+  float: left;
   text-align: center;
   overflow: hidden;
-  color: #efefef;
+  position: fixed;
 }
 
 .left .bg-img {
-  background-position: center center;
-  background-repeat: no-repeat;
+  background: url('../img/headshot1-bw.png') center center no-repeat;
   background-size: cover;
   height: 100%;
   width: 100%;
@@ -39,7 +42,7 @@ a {
   left: 0;
 }
 
-.left .bg-img::before {
+.left .bg-img:before {
   content: '';
   position: absolute;
   top: 0;
@@ -47,152 +50,86 @@ a {
   bottom: 0;
   left: 0;
   background: #185a9d;
-  background-image: linear-gradient(to left top, #43cea2, #185a9d);
+  background-image: linear-gradient(to left top, #43cea2 , #185a9d);
   opacity: 0.85;
+}
+
+.left-inner,
+.right-inner {
+  padding: 50px;
 }
 
 .left-inner {
   display: flex;
   align-items: center;
-  min-height: 24em;
   justify-content: center;
   height: 100%;
-  padding: 50px;
 }
 
 .left .info {
-  flex: none;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   color: #fff;
   width: 90%;
   margin: 0 auto;
+  margin-top: 50%;
 }
 
-.left .social-links a {
-  margin: 0 10px;
+.left .info .name {
+  font-weight: 500;
 }
 
-/* Right Side Styles */
+.left .info .social-links {
+  margin-top: 30px;
+}
+
+.left .info .fa {
+  margin: 10px;
+  font-size: 24px;
+  color: #fff;
+}
+
 .right {
   float: right;
-  width: 50%;
-}
-
-.right a {
-  color: #000;
-}
-
-.right-inner {
-  padding: 50px;
-}
-
-.right h4,
-.right .content {
-  display: inline-block;
-  vertical-align: top;
 }
 
 .right h4 {
-  width: 20%;
   margin: 0 0 20px;
   text-transform: uppercase;
   font-size: 14px;
+  background-color: #2A54F5;
+  background-image: linear-gradient(45deg,#2A54F5 0%,#33E5BB 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .right .content {
-  width: 80%;
-  padding: 0;
-  margin: 0 0 50px;
   font-weight: 300;
   line-height: 1.5;
 }
 
-.right .content ul.description {
-  padding-left: 20px;
-  margin-top: 10px;
-  font-size: 15px;
-}
-
-.right .introduction .intro-p:first-of-type {
-  margin-top: 0;
-}
-
-.right .skills .skill-category {
-  margin-bottom: 10px;
-}
-
-.right .skills .skill-category:last-of-type {
-  margin-bottom: 0px;
-}
-
-.right .skills .skill-category > strong {
-  text-transform: uppercase;
-  font-size: 14px;
-}
-
-.right .education {
-  font-size: 16px;
-}
-
-.right .education .university {
-  font-weight: 700;
-  font-size: 16px;
-}
-
-.right .education .college {
-  font-weight: 700;
-  font-style: italic;
-  margin-bottom: 10px;
-}
-
-.right .education .grad-date {
-  text-transform: uppercase;
-  color: #aaa;
-  font-size: 13px;
-  font-weight: 500;
-  margin-top: 20px;
-}
-
-.right .experience .exp-item {
+.right .exp-item {
   margin-bottom: 30px;
 }
 
-.right .experience .exp-item:last-of-type {
-  margin-bottom: 0;
-}
-
-.right .experience .exp-item .job {
+.right .exp-item .job {
   margin: 0;
   font-weight: 700;
 }
 
-.right .experience .exp-item .duration {
+.right .exp-item .duration {
   font-size: 13px;
   font-weight: 500;
   float: right;
   color: #aaa;
   text-transform: uppercase;
-  position: relative;
-  top: 1px;
-  margin-bottom: 5px;
-}
-
-.right .experience .exp-item .title {
-  font-weight: 700;
-  font-style: italic;
 }
 
 .right .projects .project-item {
   margin-bottom: 20px;
-}
-
-.right .projects .project-title {
-  font-weight: 700;
-}
-
-.right .projects .project-desc {
-  font-size: 15px;
-  margin: 0 0 10px;
 }
 
 .right a.resume {
@@ -215,41 +152,8 @@ a {
   font-weight: 700;
   font-size: 16px;
   text-transform: uppercase;
-}
-
-/* Responsive Styles */
-@media screen and (max-width: 1000px) {
-  .left, .right {
-    display: block;
-    width: 100%;
-    position: static;
-    float: none;
-  }
-  
-  .left {
-    height: 400px;
-  }
-  
-  .left .info {
-    margin-top: 50px;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .right h4,
-  .right .content {
-    display: block;
-    width: 100%;
-  }
-  
-  .right-inner,
-  .left-inner {
-    padding: 40px;
-  }
-}
-
-@media screen and (max-width: 340px) {
-  .right .experience .exp-item .duration {
-    float: none;
-  }
+  background-color: #2A54F5;
+  background-image: linear-gradient(45deg,#2A54F5 0%,#33E5BB 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
