@@ -31,7 +31,6 @@ a {
 }
 
 .left .bg-img {
-  background: url('public/assets/clifford.jpg') center center no-repeat;
   background-size: cover;
   height: 100%;
   width: 100%;

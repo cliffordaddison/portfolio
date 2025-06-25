@@ -1,9 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ArrowDownToLine, Github, Linkedin, Twitter, Instagram } from "lucide-react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const [activeSection, setActiveSection] = useState('about');
+  const aboutRef = useRef(null);
+  const experienceRef = useRef(null);
+  const projectsRef = useRef(null);
+
+  useEffect(() => {
+    setMounted(true);
+    
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 200;
+      
+      if (scrollPosition < experienceRef.current.offsetTop) {
+        setActiveSection('about');
+      } else if (scrollPosition < projectsRef.current.offsetTop) {
+        setActiveSection('experience');
+      } else {
+        setActiveSection('projects');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   if (!mounted) return null;
 
@@ -18,19 +42,6 @@ export default function Home() {
     resumeURL: 'https://drive.usercontent.google.com/u/0/uc?id=19AKkU14qt_3w5grRQAdEcEvMetZ2KIO7&export=download',
     about: "I'm a passionate Artificial Intelligence and Data Science graduate student with strong experience in data modeling, ETL pipeline development, and machine learning. I aim to contribute to Hootsuite's data engineering team through technical rigor and collaborative energy.",
     experience: [
-      {
-        title: "Part-Time Experience in Canada",
-        jobs: [
-          {
-            company: "Food Basics",
-            position: "Cashier",
-            duration: "Aug 2023 – Present",
-            description: [
-              "Provided exceptional customer service, performed price checks, and processed returns."
-            ]
-          }
-        ]
-      },
       {
         title: "Professional Experience",
         jobs: [
@@ -74,6 +85,19 @@ export default function Home() {
             duration: "Aug 2015 – Jul 2016",
             description: [
               "Streamlined document management and improved client communication."
+            ]
+          }
+        ]
+      },
+      {
+        title: "Part-Time Experience in Canada",
+        jobs: [
+          {
+            company: "Food Basics",
+            position: "Cashier",
+            duration: "Aug 2023 – Present",
+            description: [
+              "Provided exceptional customer service, performed price checks, and processed returns."
             ]
           }
         ]
@@ -125,7 +149,54 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-navy text-slate-300 font-sans">
-      <div className="max-w-7xl mx-auto px-8 py-16 md:py-24">
+      {/* Navbar */}
+      <nav className="fixed w-full bg-navy/90 backdrop-blur-sm z-50 border-b border-slate-800">
+        <div className="max-w-7xl mx-auto px-8 py-4">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center">
+              <div className="w-10 h-10 rounded-full overflow-hidden mr-4">
+                <img 
+                  src="/assets/clifford.jpg" 
+                  alt="Clifford Addison" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <span className="text-green font-mono text-sm">ca</span>
+            </div>
+            
+            <div className="hidden md:flex items-center space-x-8">
+              <a 
+                href="#about" 
+                className={`text-sm font-mono transition-colors ${activeSection === 'about' ? 'text-green' : 'text-slate-400 hover:text-green'}`}
+              >
+                <span className="text-green mr-1">01.</span> About
+              </a>
+              <a 
+                href="#experience" 
+                className={`text-sm font-mono transition-colors ${activeSection === 'experience' ? 'text-green' : 'text-slate-400 hover:text-green'}`}
+              >
+                <span className="text-green mr-1">02.</span> Experience
+              </a>
+              <a 
+                href="#projects" 
+                className={`text-sm font-mono transition-colors ${activeSection === 'projects' ? 'text-green' : 'text-slate-400 hover:text-green'}`}
+              >
+                <span className="text-green mr-1">03.</span> Projects
+              </a>
+              <a 
+                href={DATA.resumeURL} 
+                target="_blank" 
+                rel="noreferrer"
+                className="text-sm font-mono px-4 py-2 border border-green text-green rounded hover:bg-green/10 transition-colors"
+              >
+                Resume
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div className="max-w-7xl mx-auto px-8 pt-24 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           <Left
             name={DATA.name}
@@ -141,6 +212,9 @@ export default function Home() {
             experience={DATA.experience}
             projects={DATA.projects}
             resumeURL={DATA.resumeURL}
+            aboutRef={aboutRef}
+            experienceRef={experienceRef}
+            projectsRef={projectsRef}
           />
         </div>
       </div>
@@ -149,13 +223,32 @@ export default function Home() {
 }
 
 const Left = ({ name, subtext, jobStatus, twitterURL, instaURL, githubURL, linkedinURL }) => {
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true
+  });
+
   return (
-    <div className="md:col-span-5 lg:col-span-4 relative">
-      <div className="md:sticky md:top-28">
+    <motion.div 
+      ref={ref}
+      initial={{ opacity: 0, x: -20 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: 0.6 }}
+      className="md:col-span-5 lg:col-span-4 relative"
+    >
+      <div className="md:sticky md:top-32">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">{name}</h1>
           <h2 className="text-lg text-green mb-4">{subtext}</h2>
           <p className="text-slate-400">{jobStatus}</p>
+        </div>
+
+        <div className="w-48 h-48 rounded-full overflow-hidden mb-8 mx-auto md:mx-0 border-2 border-green/30">
+          <img 
+            src="/assets/clifford.jpg" 
+            alt="Clifford Addison" 
+            className="w-full h-full object-cover"
+          />
         </div>
 
         <nav className="mb-8">
@@ -193,33 +286,70 @@ const Left = ({ name, subtext, jobStatus, twitterURL, instaURL, githubURL, linke
           </a>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
-const Right = ({ about, experience, projects, resumeURL }) => {
+const Right = ({ about, experience, projects, resumeURL, aboutRef, experienceRef, projectsRef }) => {
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true
+  });
+
   return (
-    <div className="md:col-span-7 lg:col-span-8">
-      <section id="about" className="mb-16">
-        <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+    <motion.div 
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: 0.2 }}
+      className="md:col-span-7 lg:col-span-8"
+    >
+      <section id="about" ref={aboutRef} className="mb-16">
+        <motion.h2 
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-2xl font-bold text-white mb-6 flex items-center"
+        >
           <span className="text-green mr-2 text-lg font-mono">01.</span> About Me
-        </h2>
-        <div className="text-slate-400 space-y-4">
+        </motion.h2>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="text-slate-400 space-y-4"
+        >
           <p>{about}</p>
-        </div>
+        </motion.div>
       </section>
 
-      <section id="experience" className="mb-16">
-        <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+      <section id="experience" ref={experienceRef} className="mb-16">
+        <motion.h2 
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-2xl font-bold text-white mb-6 flex items-center"
+        >
           <span className="text-green mr-2 text-lg font-mono">02.</span> Experience
-        </h2>
-        <div className="space-y-8">
+        </motion.h2>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="space-y-8"
+        >
           {experience.map((section, index) => (
             <div key={index}>
               <h3 className="text-xl font-semibold text-slate-300 mb-4">{section.title}</h3>
               <div className="space-y-6">
                 {section.jobs.map((job, jobIndex) => (
-                  <div key={jobIndex} className="relative pl-8">
+                  <motion.div 
+                    key={jobIndex} 
+                    className="relative pl-8"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={inView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.4, delay: 0.2 + (jobIndex * 0.1) }}
+                  >
                     <div className="absolute left-0 top-1 h-3 w-3 rounded-full bg-green"></div>
                     <div className="absolute left-1.5 top-4 bottom-0 w-px bg-slate-600"></div>
                     
@@ -235,21 +365,38 @@ const Right = ({ about, experience, projects, resumeURL }) => {
                         <li key={descIndex}>{desc}</li>
                       ))}
                     </ul>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
-      <section id="projects" className="mb-16">
-        <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+      <section id="projects" ref={projectsRef} className="mb-16">
+        <motion.h2 
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-2xl font-bold text-white mb-6 flex items-center"
+        >
           <span className="text-green mr-2 text-lg font-mono">03.</span> Projects
-        </h2>
-        <div className="grid grid-cols-1 gap-6">
+        </motion.h2>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="grid grid-cols-1 gap-6"
+        >
           {projects.map((project, index) => (
-            <div key={index} className="bg-slate-800 rounded-lg p-6 hover:bg-slate-700 transition-colors">
+            <motion.div 
+              key={index} 
+              className="bg-slate-800 rounded-lg p-6 hover:bg-slate-700 transition-colors"
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 0.2 + (index * 0.1) }}
+              whileHover={{ y: -5 }}
+            >
               <div className="flex justify-between items-start mb-2">
                 <h3 className="text-lg font-medium text-white">
                   <a href={project.link} target="_blank" rel="noreferrer" className="hover:text-green transition-colors">
@@ -265,22 +412,29 @@ const Right = ({ about, experience, projects, resumeURL }) => {
                 </a>
               </div>
               <p className="text-slate-400">{project.description}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
-      <div className="text-center">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.6, delay: 0.8 }}
+        className="text-center"
+      >
         <a 
           href={resumeURL} 
           target="_blank" 
           rel="noreferrer"
           className="inline-flex items-center px-6 py-3 border border-green text-green rounded hover:bg-green/10 transition-colors"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           <ArrowDownToLine size={18} className="mr-2" />
           Download Resume
         </a>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
