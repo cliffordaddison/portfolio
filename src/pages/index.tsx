@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from "react";
-import { ArrowDownToLine, Github, Linkedin, Twitter, Instagram } from "lucide-react";
+import { ArrowDownToLine, Github, Linkedin, Twitter, Instagram, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [activeSection, setActiveSection] = useState('about');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const aboutRef = useRef(null);
   const experienceRef = useRef(null);
   const projectsRef = useRef(null);
@@ -28,6 +29,10 @@ export default function Home() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
 
   if (!mounted) return null;
 
@@ -154,12 +159,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-8 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center">
-              <div className="w-10 h-10 rounded-full overflow-hidden mr-4">
-                <img 
-                  src="/assets/clifford.jpg" 
-                  alt="Clifford Addison" 
-                  className="w-full h-full object-cover"
-                />
+              <div className="w-10 h-10 rounded-full bg-green flex items-center justify-center mr-4">
+                <span className="text-navy font-bold">CA</span>
               </div>
               <span className="text-green font-mono text-sm">ca</span>
             </div>
@@ -192,11 +193,55 @@ export default function Home() {
                 Resume
               </a>
             </div>
+
+            {/* Mobile menu button */}
+            <button 
+              className="md:hidden text-slate-400 hover:text-green focus:outline-none"
+              onClick={toggleMobileMenu}
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
+
+          {/* Mobile menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden mt-4 pb-4 space-y-4">
+              <a 
+                href="#about" 
+                className="block text-sm font-mono text-slate-400 hover:text-green transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span className="text-green mr-1">01.</span> About
+              </a>
+              <a 
+                href="#experience" 
+                className="block text-sm font-mono text-slate-400 hover:text-green transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span className="text-green mr-1">02.</span> Experience
+              </a>
+              <a 
+                href="#projects" 
+                className="block text-sm font-mono text-slate-400 hover:text-green transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span className="text-green mr-1">03.</span> Projects
+              </a>
+              <a 
+                href={DATA.resumeURL} 
+                target="_blank" 
+                rel="noreferrer"
+                className="inline-block text-sm font-mono px-4 py-2 border border-green text-green rounded hover:bg-green/10 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Resume
+              </a>
+            </div>
+          )}
         </div>
       </nav>
 
-      <div className="max-w-7xl mx-auto px-8 pt-24 pb-16">
+      <div className="max-w-7xl mx-auto px-8 pt-32 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           <Left
             name={DATA.name}
@@ -243,12 +288,18 @@ const Left = ({ name, subtext, jobStatus, twitterURL, instaURL, githubURL, linke
           <p className="text-slate-400">{jobStatus}</p>
         </div>
 
-        <div className="w-48 h-48 rounded-full overflow-hidden mb-8 mx-auto md:mx-0 border-2 border-green/30">
+        <div className="w-48 h-48 rounded-full overflow-hidden mb-8 mx-auto md:mx-0 border-2 border-green/30 relative group">
           <img 
-            src="/assets/clifford.jpg" 
+            src="/clifford.jpg" 
             alt="Clifford Addison" 
             className="w-full h-full object-cover"
           />
+          {/* Ripple effect overlay */}
+          <div className="absolute inset-0 rounded-full overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="absolute inset-0 bg-green/10 animate-[ripple_3s_linear_infinite]"></div>
+            <div className="absolute inset-0 bg-green/10 animate-[ripple_3s_linear_infinite_1s]"></div>
+            <div className="absolute inset-0 bg-green/10 animate-[ripple_3s_linear_infinite_2s]"></div>
+          </div>
         </div>
 
         <nav className="mb-8">
@@ -272,17 +323,21 @@ const Left = ({ name, subtext, jobStatus, twitterURL, instaURL, githubURL, linke
         </nav>
 
         <div className="flex space-x-4">
-          <a href={githubURL} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-green transition-colors">
+          <a href={githubURL} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-green transition-colors relative group">
             <Github size={20} />
+            <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-green opacity-0 group-hover:opacity-100 transition-opacity">GitHub</span>
           </a>
-          <a href={linkedinURL} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-green transition-colors">
+          <a href={linkedinURL} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-green transition-colors relative group">
             <Linkedin size={20} />
+            <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-green opacity-0 group-hover:opacity-100 transition-opacity">LinkedIn</span>
           </a>
-          <a href={twitterURL} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-green transition-colors">
+          <a href={twitterURL} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-green transition-colors relative group">
             <Twitter size={20} />
+            <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-green opacity-0 group-hover:opacity-100 transition-opacity">Twitter</span>
           </a>
-          <a href={instaURL} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-green transition-colors">
+          <a href={instaURL} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-green transition-colors relative group">
             <Instagram size={20} />
+            <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-green opacity-0 group-hover:opacity-100 transition-opacity">Instagram</span>
           </a>
         </div>
       </div>
@@ -304,7 +359,7 @@ const Right = ({ about, experience, projects, resumeURL, aboutRef, experienceRef
       transition={{ duration: 0.6, delay: 0.2 }}
       className="md:col-span-7 lg:col-span-8"
     >
-      <section id="about" ref={aboutRef} className="mb-16">
+      <section id="about" ref={aboutRef} className="mb-16 scroll-mt-32">
         <motion.h2 
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
@@ -323,7 +378,7 @@ const Right = ({ about, experience, projects, resumeURL, aboutRef, experienceRef
         </motion.div>
       </section>
 
-      <section id="experience" ref={experienceRef} className="mb-16">
+      <section id="experience" ref={experienceRef} className="mb-16 scroll-mt-32">
         <motion.h2 
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
@@ -345,12 +400,12 @@ const Right = ({ about, experience, projects, resumeURL, aboutRef, experienceRef
                 {section.jobs.map((job, jobIndex) => (
                   <motion.div 
                     key={jobIndex} 
-                    className="relative pl-8"
+                    className="relative pl-8 group"
                     initial={{ opacity: 0, x: 20 }}
                     animate={inView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.4, delay: 0.2 + (jobIndex * 0.1) }}
                   >
-                    <div className="absolute left-0 top-1 h-3 w-3 rounded-full bg-green"></div>
+                    <div className="absolute left-0 top-1 h-3 w-3 rounded-full bg-green group-hover:animate-pulse"></div>
                     <div className="absolute left-1.5 top-4 bottom-0 w-px bg-slate-600"></div>
                     
                     <div className="mb-2">
@@ -373,7 +428,7 @@ const Right = ({ about, experience, projects, resumeURL, aboutRef, experienceRef
         </motion.div>
       </section>
 
-      <section id="projects" ref={projectsRef} className="mb-16">
+      <section id="projects" ref={projectsRef} className="mb-16 scroll-mt-32">
         <motion.h2 
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
@@ -391,27 +446,36 @@ const Right = ({ about, experience, projects, resumeURL, aboutRef, experienceRef
           {projects.map((project, index) => (
             <motion.div 
               key={index} 
-              className="bg-slate-800 rounded-lg p-6 hover:bg-slate-700 transition-colors"
+              className="bg-slate-800 rounded-lg p-6 hover:bg-slate-700 transition-colors relative overflow-hidden group"
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.2 + (index * 0.1) }}
               whileHover={{ y: -5 }}
             >
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="text-lg font-medium text-white">
-                  <a href={project.link} target="_blank" rel="noreferrer" className="hover:text-green transition-colors">
-                    {project.title}
-                  </a>
-                </h3>
-                <a href={project.link} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-green transition-colors">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                    <polyline points="15 3 21 3 21 9"></polyline>
-                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                  </svg>
-                </a>
+              {/* Ripple effect background */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute -inset-2 bg-green/10 rounded-lg animate-[ripple_3s_linear_infinite]"></div>
+                <div className="absolute -inset-2 bg-green/10 rounded-lg animate-[ripple_3s_linear_infinite_1s]"></div>
+                <div className="absolute -inset-2 bg-green/10 rounded-lg animate-[ripple_3s_linear_infinite_2s]"></div>
               </div>
-              <p className="text-slate-400">{project.description}</p>
+              
+              <div className="relative z-10">
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="text-lg font-medium text-white">
+                    <a href={project.link} target="_blank" rel="noreferrer" className="hover:text-green transition-colors">
+                      {project.title}
+                    </a>
+                  </h3>
+                  <a href={project.link} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-green transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </a>
+                </div>
+                <p className="text-slate-400">{project.description}</p>
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -427,12 +491,20 @@ const Right = ({ about, experience, projects, resumeURL, aboutRef, experienceRef
           href={resumeURL} 
           target="_blank" 
           rel="noreferrer"
-          className="inline-flex items-center px-6 py-3 border border-green text-green rounded hover:bg-green/10 transition-colors"
+          className="inline-flex items-center px-6 py-3 border border-green text-green rounded hover:bg-green/10 transition-colors relative overflow-hidden group"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <ArrowDownToLine size={18} className="mr-2" />
-          Download Resume
+          {/* Ripple effect */}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100">
+            <div className="absolute inset-0 bg-green/10 animate-[ripple_3s_linear_infinite]"></div>
+            <div className="absolute inset-0 bg-green/10 animate-[ripple_3s_linear_infinite_1s]"></div>
+            <div className="absolute inset-0 bg-green/10 animate-[ripple_3s_linear_infinite_2s]"></div>
+          </div>
+          <span className="relative z-10 flex items-center">
+            <ArrowDownToLine size={18} className="mr-2" />
+            Download Resume
+          </span>
         </a>
       </motion.div>
     </motion.div>
