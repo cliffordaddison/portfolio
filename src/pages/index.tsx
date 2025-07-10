@@ -59,7 +59,7 @@ export default function Home() {
             position: "Data Analyst",
             duration: "May 2025 – Present",
             description: [
-              "OAnalyzed 4 years' worth of 100K sales, product, marketing, and operational records 4 years for Avada, a global electronics retailer, using Excel and SQL, identifying $28M revenue with 96% concentrated in 4 key products and presenting findings through comprehensive data visualizations.",
+              "Analyzed 4 years' worth of 100K sales, product, marketing, and operational records 4 years for Avada, a global electronics retailer, using Excel and SQL, identifying $28M revenue with 96% concentrated in 4 key products and presenting findings through comprehensive data visualizations.",
               "Built a loan eligibility prediction model using Excel, Python, SQL, and Power BI, analyzing client financial data to identify 20% of applicants as qualified candidates, streamlining the approval process for financial institutions."
             ]
           },
