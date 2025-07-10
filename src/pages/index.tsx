@@ -48,12 +48,21 @@ export default function Home() {
     instaURL: 'https://instagram.com/',
     githubURL: 'https://github.com/cliffordaddison',
     linkedinURL: 'https://www.linkedin.com/in/cliffordaddison',
-    resumeURL: 'https://drive.usercontent.google.com/u/0/uc?id=19AKkU14qt_3w5grRQAdEcEvMetZ2KIO7&export=download',
+    resumeURL: 'https://drive.usercontent.google.com/u/0/uc?id=1LtFcnq1p9A93FsxqKoKwTbz4rcjJsEmG&export=download',
     about: "I'm a passionate Artificial Intelligence and Data Science graduate student with strong experience in data modeling, ETL pipeline development, and machine learning. I aim to contribute to a promising data engineering team through technical rigor and collaborative energy.",
     experience: [
       {
         title: "Professional Experience",
         jobs: [
+          {
+            company: "Addison Consulting",
+            position: "Data Analyst",
+            duration: "May 2025 – Present",
+            description: [
+              "OAnalyzed 4 years' worth of 100K sales, product, marketing, and operational records 4 years for Avada, a global electronics retailer, using Excel and SQL, identifying $28M revenue with 96% concentrated in 4 key products and presenting findings through comprehensive data visualizations.",
+              "Built a loan eligibility prediction model using Excel, Python, SQL, and Power BI, analyzing client financial data to identify 20% of applicants as qualified candidates, streamlining the approval process for financial institutions."
+            ]
+          },
           {
             company: "Scanport Limited",
             position: "Operations Manager",
@@ -113,6 +122,11 @@ export default function Home() {
       }
     ],
     projects: [
+      {
+        title: "Data Analysis and Business Intelligence",
+        link: "https://github.com/cliffordaddison/BI_Ecommerce_Analysis",
+        description: "Comprehensive e-commerce analysis of 100K+ sales records using PowerBI, SQL, and Excel, identifying revenue trends, product performance, and operational insights with interactive dashboards and strategic recommendations."
+      },
       {
         title: "Scalable Yelp Review Pipeline",
         link: "https://github.com/cliffordaddison/Scalable-Yelp-Review-Pipeline",
